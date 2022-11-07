@@ -13,7 +13,8 @@ module tb (
     input wrEn,
     input [3:0] data_in,
     output rd_idx_zero,
-    output [3:0] data_out
+    output [5:0] data_out,
+    output realNum
 );
 
     // this part dumps the trace to a vcd file that can be viewed with GTKWave
@@ -26,8 +27,9 @@ module tb (
     // wire up the inputs and outputs
     wire [7:0] inputs = {data_in, 1'b0, wrEn, rst, clk};
     wire [7:0] outputs;
-    assign data_out = outputs[7:4];
+    assign data_out = outputs[7:2];
     assign rd_idx_zero = outputs[0];
+    assign realNum = outputs[1];
 
     // instantiate the DUT
     tiny_fft tiny_fft_inst(
