@@ -61,9 +61,6 @@ async def test_hw_4bit_fft(dut, inputA, inputB, inputC, inputD):
 
     rslt = await do_hw_fft(dut, input_data)
     expectedRslt = fft(input_data)
-    print(f"input {input_data}")
-    print(f"got {rslt}")
-    print(f"expected {expectedRslt}")
     for i, r in enumerate(rslt):
         assert r == expectedRslt[i]
 
@@ -71,9 +68,16 @@ async def test_hw_4bit_fft(dut, inputA, inputB, inputC, inputD):
 
 if cocotb.SIM_NAME:
     factory = TestFactory(test_hw_4bit_fft)
-    factory.add_option("inputA", list(range(-8, 7 + 1)))
-    factory.add_option("inputB", list(range(-8, 7 + 1)))
-    factory.add_option("inputC", list(range(-8, 7 + 1)))
-    factory.add_option("inputD", list(range(-8, 7 + 1)))
+    # brute force every combo (takes 2 long for github)
+    #factory.add_option("inputA", list(range(-8, 7 + 1)))
+    #factory.add_option("inputB", list(range(-8, 7 + 1)))
+    #factory.add_option("inputC", list(range(-8, 7 + 1)))
+    #factory.add_option("inputD", list(range(-8, 7 + 1)))
+
+    factory.add_option("inputA", [randint(-8, 7)])
+    factory.add_option("inputB", [randint(-8, 7)])
+    factory.add_option("inputC", [randint(-8, 7)])
+    factory.add_option("inputD", [randint(-8, 7)])
+
     factory.generate_tests()
 

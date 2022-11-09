@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1668009351" />
+    <testcase name="test_hw_4bit_fft_001" classname="test" file="/home/rice/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="713" time="0.004446983337402344" sim_time_ns="360000.001" ratio_time="80953755.31815912" />
+  </testsuite>
+</testsuites>

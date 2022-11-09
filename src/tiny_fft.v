@@ -4,7 +4,7 @@ module tiny_fft (
   input [7:0] io_in,
   output [7:0] io_out
 );
-    
+
     wire clk = io_in[0];
     wire reset = io_in[1];
     wire wrEn = io_in[2];
@@ -17,7 +17,7 @@ module tiny_fft (
     reg signed [3:0] input_reg[0:3];
 
     assign io_out[0] = (rdIdx == 0) ? 1'b1 : 1'b0;
-    // signal high when output value is real
+    // Signal high when output value is real
     assign io_out[1] = ~rdIdx[0];
 
     always @(posedge clk) begin
@@ -35,6 +35,7 @@ module tiny_fft (
     wire [5:0] stage0_3 = input_reg[1] + ((~input_reg[3]) + 1);
 
     wire [5:0] stage1[0:7];
+
     // Freq bin 0 real + complex
     assign stage1[0] = stage0_0 + stage0_2;
     assign stage1[1] = 0;
@@ -56,8 +57,6 @@ module tiny_fft (
         end else begin
             rdIdx <= rdIdx + 1;
         end
-    end   
-    
-
+    end
 
 endmodule
